@@ -2,11 +2,11 @@
 
 
 
-\*\*Nama:\*\* Devina  
+\*\*Nama:\*\* Devina
 
-\*\*Mata Kuliah:\*\* Manajemen Web Service  
+\*\*Mata Kuliah:\*\* Manajemen Web Service
 
-\*\*Berkas:\*\* `docs/minggu-1-audit-api.md`  
+\*\*Berkas:\*\* `docs/minggu-1-audit-api.md`
 
 
 
@@ -74,53 +74,53 @@
 
 {
 
-&#x20; "login": "octocat",
+\&#x20; "login": "octocat",
 
-&#x20; "id": 583234,
+\&#x20; "id": 583234,
 
-&#x20; "node\_id": "MDQ6VXNlcjU4MzIzNA==",
+\&#x20; "node\\\_id": "MDQ6VXNlcjU4MzIzNA==",
 
-&#x20; "avatar\_url": "\[https://avatars.githubusercontent.com/u/583234?v=4](https://avatars.githubusercontent.com/u/583234?v=4)",
+\&#x20; "avatar\\\_url": "\\\[https://avatars.githubusercontent.com/u/583234?v=4](https://avatars.githubusercontent.com/u/583234?v=4)",
 
-&#x20; "name": "The Octocat",
+\&#x20; "name": "The Octocat",
 
-&#x20; "company": "@github",
+\&#x20; "company": "@github",
 
-&#x20; "blog": "\[https://github.blog](https://github.blog)",
+\&#x20; "blog": "\\\[https://github.blog](https://github.blog)",
 
-&#x20; "location": "San Francisco",
+\&#x20; "location": "San Francisco",
 
-&#x20; "public\_repos": 8,
+\&#x20; "public\\\_repos": 8,
 
-&#x20; "followers": 20822,
+\&#x20; "followers": 20822,
 
-&#x20; "created\_at": "2011-01-25T18:44:36Z"
+\&#x20; "created\\\_at": "2011-01-25T18:44:36Z"
 
 }
 
 
 
-4\. Peta Sistem
+4\\. Peta Sistem
 
 flowchart LR
 
-&#x20;   Client\["Client (Postman / Web App)"] -->|"1. HTTP GET /users/{username}"| Gateway\["GitHub API Gateway / REST Layer"]
+\&#x20;   Client\\\["Client (Postman / Web App)"] -->|"1. HTTP GET /users/{username}"| Gateway\\\["GitHub API Gateway / REST Layer"]
 
-&#x20;   Gateway -->|"2. Validasi format \& rate limit"| UserService\["User Service (Internal Logic)"]
+\&#x20;   Gateway -->|"2. Validasi format \\\& rate limit"| UserService\\\["User Service (Internal Logic)"]
 
-&#x20;   UserService -->|"3. Kueri data akun"| Database\[("Database GitHub (User Store)")]
+\&#x20;   UserService -->|"3. Kueri data akun"| Database\\\[("Database GitHub (User Store)")]
 
-&#x20;   Database -->|"4. Record profil"| UserService
+\&#x20;   Database -->|"4. Record profil"| UserService
 
-&#x20;   UserService -->|"5. Serialize ke JSON"| Gateway
+\&#x20;   UserService -->|"5. Serialize ke JSON"| Gateway
 
-&#x20;   Gateway -->|"6. Response: 200 OK + JSON Body"| Client
+\&#x20;   Gateway -->|"6. Response: 200 OK + JSON Body"| Client
 
-* Penjelasan Alur: Client mengirim HTTP request ke API Gateway GitHub. Gateway memvalidasi header dan aturan batas request (rate limit), lalu meneruskan permintaan ke User Service internal. Service mengambil record dari basis data penyimpanan akun, menyusunnya menjadi format JSON, dan mengembalikannya ke client melalui response HTTP.
+\* Penjelasan Alur: Client mengirim HTTP request ke API Gateway GitHub. Gateway memvalidasi header dan aturan batas request (rate limit), lalu meneruskan permintaan ke User Service internal. Service mengambil record dari basis data penyimpanan akun, menyusunnya menjadi format JSON, dan mengembalikannya ke client melalui response HTTP.
 
 
 
-5\. Kondisi Berhasil dan Gagal
+5\\. Kondisi Berhasil dan Gagal
 
 ​Kondisi Berhasil (200 OK)
 
@@ -128,7 +128,7 @@ flowchart LR
 
 ​HTTP Status Code: 200 OK
 
-​Response Body: Objek JSON berisi atribut profil lengkap (login, id, avatar\_url, public\_repos).
+​Response Body: Objek JSON berisi atribut profil lengkap (login, id, avatar\\\_url, public\\\_repos).
 
 ​Kondisi Gagal (404 Not Found)
 
@@ -140,11 +140,11 @@ flowchart LR
 
 {
 
-&#x20; "message": "Not Found",
+\&#x20; "message": "Not Found",
 
-&#x20; "documentation\_url": "\[https://docs.github.com/rest/users/users#get-a-user](https://docs.github.com/rest/users/users#get-a-user)",
+\&#x20; "documentation\\\_url": "\\\[https://docs.github.com/rest/users/users#get-a-user](https://docs.github.com/rest/users/users#get-a-user)",
 
-&#x20; "status": "404"
+\&#x20; "status": "404"
 
 }
 
@@ -154,9 +154,9 @@ Cara Client Menangani: Client memeriksa status code 404 dan menampilkan pesan in
 
 ​6. Ide Proyek Semester (REST API Berbasis Laravel)
 
-​Nama Proyek: Perfume Catalog \& Review Service API (Sistem Katalog dan Ulasan Parfum)
+​Nama Proyek: Perfume Catalog \\\& Review Service API (Sistem Katalog dan Ulasan Parfum)
 
-​Latar Belakang \& Masalah: Penggemar wewangian sering kesulitan menemukan rincian aroma (fragrance notes) dan ulasan terstruktur dalam satu layanan terpadu.
+​Latar Belakang \\\& Masalah: Penggemar wewangian sering kesulitan menemukan rincian aroma (fragrance notes) dan ulasan terstruktur dalam satu layanan terpadu.
 
 ​Target Pengguna: Pengguna umum penikmat parfum dan pengembang aplikasi katalog wewangian.
 
@@ -180,9 +180,9 @@ Cara Client Menangani: Client memeriksa status code 404 dan menampilkan pesan in
 
 ​6. Ide Proyek Semester (REST API Berbasis Laravel)
 
-​Nama Proyek: Perfume Catalog \& Review Service API (Sistem Katalog dan Ulasan Parfum)
+​Nama Proyek: Perfume Catalog \\\& Review Service API (Sistem Katalog dan Ulasan Parfum)
 
-​Latar Belakang \& Masalah: Penggemar wewangian sering kesulitan menemukan rincian aroma (fragrance notes) dan ulasan terstruktur dalam satu layanan terpadu.
+​Latar Belakang \\\& Masalah: Penggemar wewangian sering kesulitan menemukan rincian aroma (fragrance notes) dan ulasan terstruktur dalam satu layanan terpadu.
 
 ​Target Pengguna: Pengguna umum penikmat parfum dan pengembang aplikasi katalog wewangian.
 
@@ -199,4 +199,25 @@ Cara Client Menangani: Client memeriksa status code 404 dan menampilkan pesan in
 ​REST API berformat JSON berbasis Laravel.
 
 ​Fitur mencakup operasi CRUD dasar, relasi antar tabel (database MySQL), filter aroma via query parameters, dan autentikasi token (Laravel Sanctum).
+
+
+
+7\\. Referensi Resmi
+
+​Dokumentasi GitHub REST API — Users Endpoint: https://docs.github.com/en/rest/users/users#get-a-user
+
+​Dokumentasi Resmi Framework Laravel: https://laravel.com/docs
+
+
+
+
+
+​8. Deklarasi Penggunaan AI
+
+​Pengerjaan tugas ini memanfaatkan bantuan AI (Gemini) sebagai rekan diskusi untuk merapikan format dokumentasi Markdown, memeriksa kesesuaian parameter status code HTTP, dan memformulasikan diagram Mermaid alur sistem. Seluruh pengujian endpoint telah diverifikasi secara langsung melalui Postman.
+
+
+
+
+
 
