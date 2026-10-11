@@ -2,47 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-        $books = Book::query()
-            ->orderBy('id')
-            ->get()
-            ->map(fn (Book $book): array => $this->bookData($book));
-
-        return response()->json([
-            'data' => $books,
-        ]);
+        return BookResource::collection(Book::query()->orderBy('id')->get());
     }
 
-    public function show(int $book): JsonResponse
+    public function store(StoreBookRequest $request): JsonResponse
     {
-        $bookModel = Book::find($book);
+        $book = Book::create($request->validated());
 
-        if ($bookModel === null) {
-            return response()->json([
-                'message' => 'Book not found',
-                'errors' => null,
-            ], 404);
+        return (new BookResource($book))->response()->setStatusCode(201);
+    }
+
+    public function show(int $book): BookResource|JsonResponse
+    {
+        $model = Book::find($book);
+
+        return $model ? new BookResource($model) : $this->notFound();
+    }
+
+    public function update(
+        UpdateBookRequest $request,
+        int $book
+    ): BookResource|JsonResponse {
+        $model = Book::find($book);
+
+        if ($model === null) {
+            return $this->notFound();
         }
 
-        return response()->json([
-            'data' => $this->bookData($bookModel),
-        ]);
+        $model->update($request->validated());
+
+        return new BookResource($model->refresh());
     }
 
-    private function bookData(Book $book): array
+    public function destroy(int $book): JsonResponse
     {
-        return [
-            'id' => $book->id,
-            'title' => $book->title,
-            'isbn' => $book->isbn,
-            'available' => (bool) $book->available,
-            'created_at' => $book->created_at?->toISOString(),
-        ];
+        $model = Book::find($book);
+
+        if ($model === null) {
+            return $this->notFound();
+        }
+
+        $model->delete();
+
+        return response()->json(null, 204);
+    }
+
+    private function notFound(): JsonResponse
+    {
+        return response()->json([
+            'message' => 'Book not found',
+            'errors' => null,
+        ], 404);
     }
 }
